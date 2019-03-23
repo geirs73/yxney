@@ -1,0 +1,23 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="_ValidateNugetLibraries">
+  <ItemGroup>
+    <MsBuildCommunityTasks Include="..\packages\**\MSBuild.Community.Tasks.dll"/>
+  </ItemGroup>
+
+  <Target Name="_ValidateNugetLibraries">
+    <Message Text="Found MSBuild.Community.Tasks.dll: %(MsBuildCommunityTasks.Identity)"/>
+    <Error Text="Found more than one example of MSBuild.Community.Tasks.dll under packages in solution dir" Condition="@(MsBuildCommunityTasks->Count()) &gt; 1"/>
+  </Target>
+
+  <UsingTask TaskName="MSBuild.Community.Tasks.Sleep" AssemblyFile="@(MsBuildCommunityTasks)" />
+
+  <!-- Equivalent to: -->
+  <!-- AssemblyFile="..\packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" -->
+
+  <Target Name="Test-Sleep">
+    <Message Text="Before-Sleep"/>
+    <MSBuild.Community.Tasks.Sleep Milliseconds="1000" />
+    <Message Text="After-Sleep"/>
+  </Target>
+  
+
+</Project>
