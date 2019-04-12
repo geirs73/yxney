@@ -7,7 +7,36 @@
   <Target Name="LocalBeforeBuild" BeforeTargets="Build">
     <Message Text="Local before build called!" Importance="High"/>
   </Target>
+
   <Target Name="LocalAfterBuild" AfterTargets="Build">
-    <Message Text="Local after build called! ValueNumber01: $(ValueNumber01)" Importance="High"/>
+    <Message Text="Local after build called! ValueNumber01::  $(ValueNumber01)" Importance="High"/>
   </Target>
-</Project>
+
+  <!-- We might as well get something useful out of this dummy project. Let's get some information about what is defined in a project that is built -->
+  <Target Name="PrintStandardProperties" AfterTargets="LocalAfterBuild">
+    <Message Text="MSBuildBinPath:  $(MSBuildBinPath)"/>
+    <Message Text="MSBuildExtensionsPath:  $(MSBuildExtensionsPath)"/>
+    <Message Text="MSBuildExtensionsPath32:  $(MSBuildExtensionsPath32)"/>
+    <Message Text="MSBuildExtensionsPath64:  $(MSBuildExtensionsPath64)"/>
+    <Message Text="MSBuildProjectDefaultTargets:  $(MSBuildProjectDefaultTargets)"/>
+    <Message Text="MSBuildProjectDirectory:  $(MSBuildProjectDirectory)"/>
+    <Message Text="MSBuildProjectExtension:  $(MSBuildProjectExtension)"/>
+    <Message Text="MSBuildProjectFile:  $(MSBuildProjectFile)"/>
+    <Message Text="MSBuildProjectFullPath:  $(MSBuildProjectFullPath)"/>
+    <Message Text="MSBuildProjectName:  $(MSBuildProjectName)"/>
+    <Message Text="MSBuildStartupDirectory:  $(MSBuildStartupDirectory)"/>
+    <Message Text="MSBuildToolsPath:  $(MSBuildToolsPath)"/>
+    <Message Text="MSBuildToolsVersion:  $(MSBuildToolsVersion)"/>
+    <Message Text="Inside VS projects:" Importance="High" />
+    <Message Text="VisualStudioVersion:  $(VisualStudioVersion)"/>
+  </Target>
+
+  <Target Name="PrintBuildLocations" AfterTargets="LocalAfterBuild">
+    <Message Text="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Message Text="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"/>
+  </Target>
+
+
+
+
+  </Project>

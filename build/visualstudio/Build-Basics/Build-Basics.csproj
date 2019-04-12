@@ -50,7 +50,6 @@
     <None Include="App.config" />
     <None Include="Directory.Build.targets" />
     <None Include="Directory.Build.props" />
-    <None Include="Test.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
