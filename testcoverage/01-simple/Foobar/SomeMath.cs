@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Foobar;
+﻿namespace Foobar;
 public class SomeMath
 {
     public static int Add(int a, int b) => a + b;
