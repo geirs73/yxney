@@ -1,6 +1,6 @@
 # Merging of multiple test projects
 
-Please see [Simple Coverage first](../coverage-simple/Simple%20coverage.md)
+Please see [Simple Coverage first](../01-simple/Simple%20coverage.md)
 
 ## Add an XUnit test project
 
