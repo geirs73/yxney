@@ -42,36 +42,9 @@ to make things really easy, also add reference to `coverlet.msbuild`
 ## Add target for coverage in csproj
 
 Then we need to add a local build target and hook it up to run before VSTest
-target (that is invoked by calling dotnet test). This is
-`Foobar.NUnit.Tests.csproj` after we have changed it.
+target (that is invoked by calling dotnet test).
 
 ```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="3.2.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="NUnit" Version="3.13.3" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-    <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Foobar\Foobar.csproj" />
-  </ItemGroup>
-
   <!-- This is all it takes to produce a coverage file that can be picked
   by coverage extensions or other tools -->
   <Target Name="BeforeTestCoverage" BeforeTargets="VSTest" Condition="'$(Configuration)'=='Debug'">
@@ -81,9 +54,17 @@ target (that is invoked by calling dotnet test). This is
       <CoverletOutputFormat>lcov</CoverletOutputFormat>
     </PropertyGroup>
   </Target>
-
-</Project>
 ```
+
+We also need to clean up after our selves when running `dotnet clean`:
+
+```xml
+  <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean">
+    <Delete Files="lcov.info" />
+  </Target>
+```
+
+See edited files here: [Foobar.NUnit.Tests.csproj](Foobar.NUnit.Tests/Foobar.NUnit.Tests.csproj)
 
 ## Create test class
 
