@@ -1,11 +1,5 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="">
-  <PropertyGroup>
-    <BuildDependsOn>
-      LocalBeforeBuild;
-      $(BuildDependsOn);
-    </BuildDependsOn>
-  </PropertyGroup>
-  <Target Name="LocalBeforeBuild">
+  <Target Name="LocalBeforeBuild" AfterTargets="Build">
     <Message Text="Before-Sleep" />
     <Sleep Milliseconds="5000" />
     <Message Text="After-Sleep" />    
