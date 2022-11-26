@@ -64,7 +64,7 @@ We also need to clean up after our selves when running `dotnet clean`:
   </Target>
 ```
 
-See edited files here: [Foobar.NUnit.Tests.csproj](Foobar.NUnit.Tests/Foobar.NUnit.Tests.csproj)
+Your test csproj should look like this: [Foobar.NUnit.Tests.csproj](Foobar.NUnit.Tests/Foobar.NUnit.Tests.csproj)
 
 ## Create test class
 
