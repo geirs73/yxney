@@ -90,10 +90,10 @@ Install 'Coverage Gutters' vscode extension.
 
 Go to the `SomeMath.cs` file open the command window (CTRL+SHIFT+P) and type 'gutter' to see the options.
 
-* Display - show result once, will not update when you run new coverage test
+* Display - show result once, will not update when you run new coverage test. Key: CTRL+SHIFT+7
 * Watch - look for updates to coverage continuously and display it (you probably
-  want this for a while)
-* Remove Watch - as it says
+  want this for a while). Key: CTRL+SHIFT+8
+* Remove Watch - as it says. Key: CTRL+SHIFT+9
 
 ![image.png](Simple%20coverage.md.CoverageGutters.png)
 
@@ -129,9 +129,7 @@ can add new files to look fore in vscode settings file.
     ],
 ```
 
-I prefer to use "coverage*." names for coverage files, and update my json
-settings file accordingly. Those are the filenames that `dotnet new gitignore`
-lists when you create a new ignore file.
+Remember to add your coverage files to .gitignore unless they are there alrady.
 
 ## Note 2
 
