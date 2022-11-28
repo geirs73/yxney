@@ -1,0 +1,29 @@
+<Project>
+
+  <Target Name="BeforeTestCoverage" BeforeTargets="VSTest" Condition="$(IsCoverageTestProject)">
+    <PropertyGroup>
+      <CollectCoverage>true</CollectCoverage>
+      <CoverletOutput>../.coverage/</CoverletOutput>
+      <CoverletOutputFormat>json,cobertura</CoverletOutputFormat>
+      <MergeWith>../.coverage/coverage.json</MergeWith>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean" Condition="$(IsCoverageTestProject)">
+    <RemoveDir Directories="..\.coverage\" />
+  </Target>
+
+  <Target Name="Cleanup">
+    <ItemGroup>
+      <DirectoriesToDelete Include="bin\;obj\" />
+      <FilesToDelete Include="..\**\*.log" />
+      <FilesToDelete Include="..\**\*.binlog" />
+      <FilesToDelete Include="..\**\*.bak" />
+    </ItemGroup>
+    <Message Text="Delete: %(FilesToDelete.Identity)" />
+    <Message Text="RemoveDir: %(DirectoriesToDelete.Identity)" />
+    <RemoveDir Directories="@(DirectoriesToDelete)" />
+    <Delete Files="@(FilesToDelete)" />
+  </Target>
+
+</Project>
