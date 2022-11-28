@@ -1,0 +1,11 @@
+<Project>
+  <ItemGroup />
+  <Target Name="HelloWorld">
+    <Message Text="Hello world" Importance="High" />
+  </Target>
+  <Target Name="Coverage">    
+    <Exec Command='dotnet tool run reportgenerator -reports:".\.coverage\coverage.cobertura.xml" -targetdir:".\.coverage\report.html" -reporttypes:html' />
+    <Exec Command="cmd -c .\.coverage\report.html" />
+  </Target>
+
+</Project>
