@@ -4,7 +4,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
   <PropertyGroup>
-    <IsCoverageTestProject>false</IsCoverageTestProject>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>../coverage/</CoverletOutput>
+    <CoverletOutputFormat>json,cobertura</CoverletOutputFormat>
+    <MergeWith>../coverage/coverage.json</MergeWith>
   </PropertyGroup>
 </Project>

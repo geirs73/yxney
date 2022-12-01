@@ -1,9 +1,0 @@
-{
-    "recommendations": [
-        "ryanluker.vscode-coverage-gutters",
-        "stkb.rewrap",
-        "ms-dotnettools.csharp",
-        "formulahendry.dotnet-test-explorer",
-        "tintoy.msbuild-project-tools"
-    ]
-}

@@ -15,7 +15,7 @@ The template "Class Library" was created successfully.
 
 > dotnet new sln -n Coverage
 
-> dotnet sln .\Coverage.sln add .\Foobar\
+> dotnet sln Coverage.sln add Foobar
 ```
 
 ## Create test library
@@ -27,36 +27,36 @@ in `Foobar.NUnit.Tests` project.
 ```text
 > dotnet new nunit -n Foobar.NUnit.Tests
 
-> dotnet sln .\Coverage.sln add .\Foobar.NUnit.Tests\
+> dotnet sln Coverage.sln add Foobar.NUnit.Tests
 
-> dotnet add .\Foobar.NUnit.Tests\ reference .\Foobar\
+> dotnet add Foobar.NUnit.Tests reference Foobar
 ```
 
 The test project will already include a reference to `coverlet.collector`, but
 to make things really easy, also add reference to `coverlet.msbuild`
 
 ```text
-> dotnet add .\Foobar.NUnit.Tests\ package coverlet.msbuild
+> dotnet add Foobar.NUnit.Tests\ package coverlet.msbuild
 ```
 
-## Add target for coverage in csproj
+Then we add some simple math functions in a class file:
+[SomeMath.cs](Foobar/SomeMath.cs)
 
-Then we need to add a local build target and hook it up to run before VSTest
-target (that is invoked by calling dotnet test).
+## Set up coverage in csproj
+
+We add a new property group just below the initial one with some setup for coverlet.
 
 ```xml
-  <!-- This is all it takes to produce a coverage file that can be picked
-  by coverage extensions or other tools -->
-  <Target Name="BeforeTestCoverage" BeforeTargets="VSTest" Condition="'$(Configuration)'=='Debug'">
-    <PropertyGroup>
-      <CollectCoverage>true</CollectCoverage>
-      <CoverletOutput>lcov.info</CoverletOutput>
-      <CoverletOutputFormat>lcov</CoverletOutputFormat>
-    </PropertyGroup>
-  </Target>
+  <PropertyGroup>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>lcov.info</CoverletOutput>
+    <CoverletOutputFormat>lcov</CoverletOutputFormat>
+  </PropertyGroup>
 ```
 
-We also need to clean up after our selves when running `dotnet clean`:
+We also need to clean up after our selves when running `dotnet clean`, we can
+add a local cleaning target and hook it up to the `AfterClean` target defined by
+the build system.
 
 ```xml
   <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean">
@@ -86,20 +86,22 @@ And then we run the tests
 
 ## Show coverage in editor gutters
 
-Install 'Coverage Gutters' vscode extension.
+Install *Coverage Gutters* vscode extension.
 
-Go to the `SomeMath.cs` file open the command window (CTRL+SHIFT+P) and type 'gutter' to see the options.
+Go to the `SomeMath.cs` file open the command window (`ctrl+shift+p`) and type 'gutter' to see the options.
 
-* Display - show result once, will not update when you run new coverage test. Key: CTRL+SHIFT+7
-* Watch - look for updates to coverage continuously and display it (you probably
-  want this for a while). Key: CTRL+SHIFT+8
-* Remove Watch - as it says. Key: CTRL+SHIFT+9
+* Display - show result once, will not update when you run new coverage test. Key: `ctrl+shift+7`
+* Watch - look for updates to coverage continuously and display it  Key: `ctrl+shift+8`
+* Remove Watch - as it says. Key: `ctrl+shift+9`
+* Clear display. Key: `ctrl+backspace`
 
 ![image.png](Simple%20coverage.md.CoverageGutters.png)
 
-Start the wathcing of coverage (CTRL+SHIFT+8 usually)
+## Watch increased coverage
 
-Now, add a new test and see the coverage change when running tests again.
+Start the coverage watch in *Coverage Gutters* with `ctrl+shift+8`
+
+Now, add a new test in `SomeMathTests.cs`
 
 ```csharp
     [Test]
@@ -109,11 +111,21 @@ Now, add a new test and see the coverage change when running tests again.
     }
 ```
 
+Here is the [`SomeMathTests.cs`](Foobar.NUnit.Tests/SomeMathTests.cs) after we're done.
+
+Run tests again:
+
+```text
+> dotnet test
+```
+
 Your editor should now look something like this:
 
 ![Example of how gutters look like](Simple%20coverage.md.CoverageGutters.SomeMath.png)
 
-## Note 1
+## Notes
+
+### Configuration of Coverage Gutters extension
 
 Coverage Gutters has just a few file names it will look for. If you do not set
 the name of the output file like we did above, it will not find anything. You
@@ -129,10 +141,8 @@ can add new files to look fore in vscode settings file.
     ],
 ```
 
-Remember to add your coverage files to .gitignore unless they are there alrady.
+### .gitignore
 
-## Note 2
+Remember to add your coverage files to .gitignore unless they are there already.
 
-I'm a fan of letting clean do proper cleaning, so I've added a
-`LocalCleanTestCoverage` target that hooks into `AfterClean` which removes the
-lcov.info file we made if running `dotnet clean` on the solution.
+**[Go to next example](../02-merge/Coverage%20with%20merging.md)**

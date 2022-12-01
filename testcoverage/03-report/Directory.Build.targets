@@ -1,16 +1,7 @@
 <Project>
 
-  <Target Name="BeforeTestCoverage" BeforeTargets="VSTest" Condition="$(IsCoverageTestProject)">
-    <PropertyGroup>
-      <CollectCoverage>true</CollectCoverage>
-      <CoverletOutput>../.coverage/</CoverletOutput>
-      <CoverletOutputFormat>json,cobertura</CoverletOutputFormat>
-      <MergeWith>../.coverage/coverage.json</MergeWith>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean" Condition="$(IsCoverageTestProject)">
-    <RemoveDir Directories="..\.coverage\" />
+  <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean">
+    <RemoveDir Directories="..\coverage\" />
   </Target>
 
   <Target Name="Cleanup">

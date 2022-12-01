@@ -1,7 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>lcov.info</CoverletOutput>
+    <CoverletOutputFormat>lcov</CoverletOutputFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,17 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Foobar\Foobar.csproj" />
   </ItemGroup>
-
-  <!-- This is all it takes to produce a coverage file that can be picked
-  by coverage extensions or other tools -->
-  <Target Name="BeforeTestCoverage" BeforeTargets="VSTest" Condition="'$(Configuration)'=='Debug'">
-    <PropertyGroup>
-      <CollectCoverage>true</CollectCoverage>
-      <CoverletOutput>lcov.info</CoverletOutput>
-      <CoverletOutputFormat>lcov</CoverletOutputFormat>
-    </PropertyGroup>
-  </Target>
-
+  
   <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean">
     <Delete Files="lcov.info" />
   </Target>

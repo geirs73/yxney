@@ -14,9 +14,9 @@ public class SomeMoreMathTests
         Assert.Throws<DivideByZeroException>(() => SomeMath.Divide(5, 0));
     }
 
-    // [Fact]
-    // public void TestGreaterThan()
-    // {
-    //     Assert.True(SomeMath.GreaterThanOrEqual(5, 3));
-    // }
+    [Fact]
+    public void TestMaxValueInArray()
+    {
+        Assert.Equal<int>(300, SomeMath.MaxValueInArray(new []{3,5,9,11,300,14,31}));
+    }
 }
