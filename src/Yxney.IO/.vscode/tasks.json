@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/HashPathConsole/HashPathConsole.csproj",
+                "${workspaceFolder}/exe/HashPathConsole/HashPathConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/HashPathConsole/HashPathConsole.csproj",
+                "${workspaceFolder}/exe/HashPathConsole/HashPathConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/HashPathConsole/HashPathConsole.csproj"
+                "${workspaceFolder}/exe/HashPathConsole/HashPathConsole.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

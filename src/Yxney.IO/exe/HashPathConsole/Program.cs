@@ -31,7 +31,7 @@ var hp = new HashPath { HashingMethod = HashPath.HashType.SHA1 };
 for (int i = 0; i < 10; i++)
 {
     string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
-    string hpString = hp.GetPath(manyFileName);
+    string hpString = hp.GetHashedFilePath(manyFileName);
     Console.WriteLine($"{manyFileName}: {hpString}");
 }
 
@@ -39,14 +39,21 @@ var hp2 = new HashPath { HashingMethod = HashPath.HashType.SHA1, BytesPerDirecto
 for (int i = 0; i < 10; i++)
 {
     string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
-    string hpString = hp2.GetPath(manyFileName);
+    string hpString = hp2.GetHashedFilePath(manyFileName);
     Console.WriteLine($"{manyFileName}: {hpString}");
 }
 
 for (int i = 0; i < 10; i++)
 {
     string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
-    string hpString = HashPath.GetHashStructurePath(manyFileName, HashPath.HashType.SHA1, 3,5);
+    string hpString = HashPath.GetHashedFilePath(manyFileName, HashPath.HashType.SHA1, 3,5);
+    Console.WriteLine($"{manyFileName}: {hpString}");
+}
+
+for (int i = 0; i < 10; i++)
+{
+    string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
+    string hpString = HashPath.GetHashedFilePath(manyFileName, HashPath.HashType.SHA512, 3,5);
     Console.WriteLine($"{manyFileName}: {hpString}");
 }
 

@@ -21,24 +21,21 @@ public sealed class HashPath
         SHA1,
         SHA256,
         SHA512,
-        XxHash32,
         XxHash64,
-        Crc32,
         Crc64
     }
 
-    public string GetPath(string path)
+    public string GetHashedFilePath(string path)
     {
-        return HashPath.GetHashStructurePath(path, HashingMethod, BytesPerDirectoryLevel.ToArray());
+        return HashPath.GetHashedFilePath(path, HashingMethod, BytesPerDirectoryLevel.ToArray());
     }
 
-    public static string GetHashStructurePath(
+    public static string GetHashedFilePath(
         string path,
         HashType hashAlgorithm = HashType.XxHash64,
         params int[]? bytesPerDirectoryLevel)
     {
         bytesPerDirectoryLevel ??= new int[] { 3 };
-var foo = new FileInfo("Barrier.zot");
 
         string extension = Path.GetExtension(path);
         string fileName = Path.GetFileNameWithoutExtension(path);
@@ -89,6 +86,7 @@ var foo = new FileInfo("Barrier.zot");
         return parts.ToArray();
     }
 
+#pragma warning disable CA5350,CA5351            
     private static byte[] HashWithSelectedAlgorithm(byte[] clearTextBytes, HashType hashWith = HashType.MD5)
     {
         return hashWith switch
@@ -96,11 +94,10 @@ var foo = new FileInfo("Barrier.zot");
             HashType.SHA1 => SHA1.HashData(clearTextBytes),
             HashType.SHA256 => SHA256.HashData(clearTextBytes),
             HashType.SHA512 => SHA512.HashData(clearTextBytes),
-            HashType.XxHash32 => XxHash32.Hash(clearTextBytes),
             HashType.XxHash64 => XxHash64.Hash(clearTextBytes),
-            HashType.Crc32 => Crc32.Hash(clearTextBytes),
             HashType.Crc64 => Crc64.Hash(clearTextBytes),
             _ => MD5.HashData(clearTextBytes)
         };
+#pragma warning restore CA5350,CA5351            
     }
 }
