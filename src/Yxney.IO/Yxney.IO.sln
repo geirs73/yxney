@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashPath", "HashDistributedPath\HashDistributedPath.csproj", "{829F1D00-3366-4904-9A76-090080761943}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yxney.IO", "src\Yxney.IO.csproj", "{829F1D00-3366-4904-9A76-090080761943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashPath.Tests", "HashPath.Tests\HashPath.Tests.csproj", "{45AE4A17-9F0A-4D26-8DC2-2BA71D61FE86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yxney.IO.Tests", "tests\Yxney.IO.Tests.csproj", "{45AE4A17-9F0A-4D26-8DC2-2BA71D61FE86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashPathConsole", "HashPathConsole\HashPathConsole.csproj", "{2623838C-DCB4-4B11-8F4E-134774321E5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashPathConsole", "exe\HashPathConsole\HashPathConsole.csproj", "{2623838C-DCB4-4B11-8F4E-134774321E5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

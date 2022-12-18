@@ -5,6 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Yxney.IO</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HashDistributedPath\HashDistributedPath.csproj" />
+    <ProjectReference Include="..\..\src\Yxney.IO.csproj" />
   </ItemGroup>
 
 </Project>

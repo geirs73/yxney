@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Yxney.IO.HashDistributedPath;
+namespace Yxney.IO;
 
 public sealed class HashPath
 {

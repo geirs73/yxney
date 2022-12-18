@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HashDistributedPath\HashDistributedPath.csproj" />
+    <ProjectReference Include="..\src\Yxney.IO.csproj" />
   </ItemGroup>
 
 </Project>
