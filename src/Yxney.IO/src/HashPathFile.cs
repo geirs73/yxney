@@ -8,29 +8,11 @@ using System.Text;
 
 namespace Yxney.IO;
 
-public sealed class HashPath
+public static class HashPathFile
 {
-    public IEnumerable<int> BytesPerDirectoryLevel { get; init; } = new int[] { 3 };
-    public HashType HashingMethod { get; init; } = HashType.MD5;
-
     private const int _MinimumFileNameLength = 5;
 
-    public enum HashType
-    {
-        MD5,
-        SHA1,
-        SHA256,
-        SHA512,
-        XxHash64,
-        Crc64
-    }
-
-    public string GetHashedFilePath(string path)
-    {
-        return HashPath.GetHashedFilePath(path, HashingMethod, BytesPerDirectoryLevel.ToArray());
-    }
-
-    public static string GetHashedFilePath(
+    public static string GetHashedPath(
         string path,
         HashType hashAlgorithm = HashType.XxHash64,
         params int[]? bytesPerDirectoryLevel)
