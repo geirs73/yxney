@@ -9,6 +9,7 @@
         "msbuild",
         "nunit",
         "reportgenerator",
-        "xunit"
+        "xunit",
+        "Yxney"
     ]
 }

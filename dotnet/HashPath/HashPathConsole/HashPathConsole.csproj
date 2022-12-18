@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HashPath\HashPath.csproj" />
+    <ProjectReference Include="..\HashDistributedPath\HashDistributedPath.csproj" />
   </ItemGroup>
 
 </Project>

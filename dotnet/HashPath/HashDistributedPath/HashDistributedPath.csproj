@@ -2,13 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- <ImplicitUsings>enable</ImplicitUsings> -->
     <Nullable>enable</Nullable>
+    <RootNamespace>Yxney.IO</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <AnalysisMode>All</AnalysisMode>
-    <NoWarn>CA5350;CA5351;CA1308</NoWarn>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- <NoWarn>CA5350;CA5351;CA1308</NoWarn> -->
+    <NoWarn>CA5350;CA5351</NoWarn>
+    <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.IO.Hashing" Version="7.0.0" />
