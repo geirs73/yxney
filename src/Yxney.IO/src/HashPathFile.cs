@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Yxney.IO;
+namespace Yxney.IO.HashPath;
 
 public static class HashPathFile
 {
@@ -14,7 +14,7 @@ public static class HashPathFile
 
     public static string GetHashedPath(
         string path,
-        HashType hashAlgorithm = HashType.XxHash64,
+        HashPathAlgorithm hashAlgorithm = HashPathAlgorithm.XxHash64,
         params int[]? bytesPerDirectoryLevel)
     {
         bytesPerDirectoryLevel ??= new int[] { 3 };
@@ -69,15 +69,15 @@ public static class HashPathFile
     }
 
 #pragma warning disable CA5350,CA5351            
-    private static byte[] HashWithSelectedAlgorithm(byte[] clearTextBytes, HashType hashWith = HashType.MD5)
+    private static byte[] HashWithSelectedAlgorithm(byte[] clearTextBytes, HashPathAlgorithm hashWith = HashPathAlgorithm.MD5)
     {
         return hashWith switch
         {
-            HashType.SHA1 => SHA1.HashData(clearTextBytes),
-            HashType.SHA256 => SHA256.HashData(clearTextBytes),
-            HashType.SHA512 => SHA512.HashData(clearTextBytes),
-            HashType.XxHash64 => XxHash64.Hash(clearTextBytes),
-            HashType.Crc64 => Crc64.Hash(clearTextBytes),
+            HashPathAlgorithm.SHA1 => SHA1.HashData(clearTextBytes),
+            HashPathAlgorithm.SHA256 => SHA256.HashData(clearTextBytes),
+            HashPathAlgorithm.SHA512 => SHA512.HashData(clearTextBytes),
+            HashPathAlgorithm.XxHash64 => XxHash64.Hash(clearTextBytes),
+            HashPathAlgorithm.Crc64 => Crc64.Hash(clearTextBytes),
             _ => MD5.HashData(clearTextBytes)
         };
 #pragma warning restore CA5350,CA5351            

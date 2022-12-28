@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Yxney.IO</RootNamespace>
+    <RootNamespace>Yxney.IO.HashPath</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <AnalysisMode>All</AnalysisMode>

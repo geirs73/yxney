@@ -1,6 +1,6 @@
-namespace Yxney.IO;
+namespace Yxney.IO.HashPath;
 
-public enum HashType
+public enum HashPathAlgorithm
 {
     MD5,
     SHA1,
