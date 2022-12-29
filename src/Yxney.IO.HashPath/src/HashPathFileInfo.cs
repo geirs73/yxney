@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace Yxney.IO.HashPath;
@@ -7,14 +8,21 @@ public class HashPathFileInfo : IHashPathFileInfo
     public DirectoryLengths DirectoryLengths { get; init; } = DirectoryLengths.Create();
     public HashPathAlgorithm HashingMethod { get; init; } = HashPathAlgorithm.XxHash64;
 
-    public string GetHashedPath(string path)
+    public string GetHashedPath(string filePath)
     {
-        return HashPathFile.GetHashedPath(path, HashingMethod, DirectoryLengths);
+        return HashPathFile.GetHashedPath(filePath, HashingMethod, DirectoryLengths);
     }
 
-    public FileInfo GetHashedPathFileInfo(string path)
+    public FileInfo GetHashedPathFileInfo(FileInfo fileInfo)
     {
-        var filePath = GetHashedPath(path);
-        return new FileInfo(filePath);
+        ArgumentNullException.ThrowIfNull(fileInfo);
+        return GetHashedPathFileInfo(fileInfo.FullName);
+    }
+
+    public FileInfo GetHashedPathFileInfo(string filePath)
+    {
+        ArgumentNullException.ThrowIfNull(filePath);
+        string hashedPath = GetHashedPath(filePath);
+        return new FileInfo(hashedPath);
     }
 }

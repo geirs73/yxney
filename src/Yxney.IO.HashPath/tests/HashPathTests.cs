@@ -96,4 +96,15 @@ public class HashPathTests
             HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.MD5, DirectoryLengths.Create()),
             Is.EqualTo("""ba9\61769465c20d911d7f63874ddf2e8.xml"""));
     }
+
+    [Test]
+    public void TestFileInfoExtensions()
+    {
+        FileInfo normalFileInfo = new("""0301-400-300-13214-0007.xml""");
+        FileInfo hashedFileInfo = normalFileInfo.GetHashPathFileInfo(HashPathAlgorithm.MD5, DirectoryLengths.Create(3,5));
+
+        string fileInfoRelativeDir = Path.GetRelativePath(Environment.CurrentDirectory, hashedFileInfo.DirectoryName!);
+        string fileInfoPathRelative = Path.Combine(fileInfoRelativeDir, hashedFileInfo.Name);
+        Assert.That(fileInfoPathRelative, Is.EqualTo("""ba9\61769\465c20d911d7f63874ddf2e8.xml"""));
+    }
 }
