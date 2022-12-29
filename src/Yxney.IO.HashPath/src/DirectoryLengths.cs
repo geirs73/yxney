@@ -12,6 +12,7 @@ public sealed class DirectoryLengths : IEnumerable<int>
 {
     private readonly int[] _directoryLengths;
     private readonly string _toString;
+    private readonly int _totalLength;
 
     public static DirectoryLengths Create(int firstLevel)
     {
@@ -54,6 +55,7 @@ public sealed class DirectoryLengths : IEnumerable<int>
     {
         _directoryLengths = levelLengths;
         _toString = string.Join(",", _directoryLengths);
+        _totalLength = _directoryLengths.Sum();
     }
 
     public int TotalLength()
@@ -75,7 +77,7 @@ public sealed class DirectoryLengths : IEnumerable<int>
     private string AsString() => _toString;
 
     [ExcludeFromCodeCoverage]
-    private string DebuggerDisplay => "DirectoryLengths: " + _toString;
+    private string DebuggerDisplay => $"DirectoryLengths: {_toString} ({_totalLength:0})";
 
     public static implicit operator string(DirectoryLengths directoryLengths)
     {
