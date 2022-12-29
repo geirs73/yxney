@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <PropertyGroup>
+        <CollectCoverage>true</CollectCoverage>
+        <CoverletOutput>../coverage/</CoverletOutput>
+        <CoverletOutputFormat>json,cobertura</CoverletOutputFormat>
+        <MergeWith>../coverage/coverage.json</MergeWith>
+    </PropertyGroup>
+</Project>
