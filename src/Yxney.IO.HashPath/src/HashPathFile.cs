@@ -14,11 +14,10 @@ public static class HashPathFile
 
     public static string GetHashedPath(
         string path,
-        HashPathAlgorithm hashAlgorithm = HashPathAlgorithm.XxHash64,
-        params int[]? bytesPerDirectoryLevel)
+        HashPathAlgorithm hashAlgorithm,
+        DirectoryLengths directoryLengths)
     {
-        bytesPerDirectoryLevel ??= new int[] { 3 };
-
+        ArgumentNullException.ThrowIfNull(directoryLengths);
         string extension = Path.GetExtension(path);
         string fileName = Path.GetFileNameWithoutExtension(path);
         string? directory = Path.GetDirectoryName(path);
@@ -30,16 +29,15 @@ public static class HashPathFile
         string hashedDataHexString = Convert.ToHexString(hashedData).ToLowerInvariant();
 #pragma warning restore CA1308
 
-        int dirLength = bytesPerDirectoryLevel.Sum(x => x);
-        int limit = (hashedDataHexString.Length - _MinimumFileNameLength);
-        if (dirLength > limit)
+        int limit = hashedDataHexString.Length - _MinimumFileNameLength;
+        if (directoryLengths.TotalLength() > limit)
         {
             throw new ArgumentException(
-                $"Too many bytes are used for directory structure, try reducing it below {limit}",
-                nameof(bytesPerDirectoryLevel));
+                $"Too many bytes are used for directory structure, try reducing it below {limit:0}",
+                nameof(directoryLengths));
         }
 
-        string[] parts = GetHashedFilePathParts(extension, directory, hashedDataHexString, bytesPerDirectoryLevel);
+        string[] parts = GetHashedFilePathParts(extension, directory, hashedDataHexString, directoryLengths);
         return Path.Combine(parts);
     }
 
@@ -47,7 +45,7 @@ public static class HashPathFile
         string extension,
         string? directory,
         string hashHexString,
-        IEnumerable<int> bytesPerDirectoryLevel)
+        DirectoryLengths bytesPerDirectoryLevel)
     {
         List<string> parts = new();
 
@@ -68,7 +66,7 @@ public static class HashPathFile
         return parts.ToArray();
     }
 
-#pragma warning disable CA5350,CA5351            
+#pragma warning disable CA5350,CA5351
     private static byte[] HashWithSelectedAlgorithm(byte[] clearTextBytes, HashPathAlgorithm hashWith = HashPathAlgorithm.MD5)
     {
         return hashWith switch
@@ -80,6 +78,6 @@ public static class HashPathFile
             HashPathAlgorithm.Crc64 => Crc64.Hash(clearTextBytes),
             _ => MD5.HashData(clearTextBytes)
         };
-#pragma warning restore CA5350,CA5351            
+#pragma warning restore CA5350,CA5351
     }
 }

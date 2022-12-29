@@ -35,7 +35,7 @@ public class HashPathTests
         HashPathAlgorithm.XxHash64)]
     public void TestNormalScenario(string input, string expected, HashPathAlgorithm hashType)
     {
-        Assert.That(HashPathFile.GetHashedPath(input, hashType, 3, 5), Is.EqualTo(expected));
+        Assert.That(HashPathFile.GetHashedPath(input, hashType, DirectoryLengths.Create(3,5)), Is.EqualTo(expected));
     }
 
     [Test]
@@ -67,7 +67,7 @@ public class HashPathTests
     {
         HashPathFileInfo hp = new()
         {
-            BytesPerDirectoryLevel = new[] { 3, 5 },
+            DirectoryLengths = DirectoryLengths.Create(3,5),
             HashingMethod = hashType
         };
 
@@ -85,15 +85,15 @@ public class HashPathTests
         Assert.Throws(
             Is.TypeOf<ArgumentException>()
                 .And.Message.EqualTo("Too many bytes are used for directory structure, "
-                    + "try reducing it below 35 (Parameter 'bytesPerDirectoryLevel')"),
-            () => HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.SHA1, 3, 64));
+                    + "try reducing it below 35 (Parameter 'directoryLengths')"),
+            () => HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.SHA1, DirectoryLengths.Create(3,64)));
     }
 
     [Test]
-    public void TestNullPath()
+    public void TestDefaultPath()
     {
         Assert.That(
-            HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.MD5, null),
+            HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.MD5, DirectoryLengths.Create()),
             Is.EqualTo("""ba9\61769465c20d911d7f63874ddf2e8.xml"""));
     }
 }

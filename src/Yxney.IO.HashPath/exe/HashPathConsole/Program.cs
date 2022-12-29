@@ -35,7 +35,7 @@ for (int i = 0; i < 10; i++)
     Console.WriteLine($"{manyFileName}: {hpString}");
 }
 
-var hp2 = new HashPathFileInfo { HashingMethod = HashPathAlgorithm.SHA1, BytesPerDirectoryLevel = new[] { 5, 3, 7 } };
+var hp2 = new HashPathFileInfo { HashingMethod = HashPathAlgorithm.SHA1, DirectoryLengths = DirectoryLengths.Create(5,3,7) };
 for (int i = 0; i < 10; i++)
 {
     string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
@@ -46,14 +46,14 @@ for (int i = 0; i < 10; i++)
 for (int i = 0; i < 10; i++)
 {
     string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
-    string hpString = HashPathFile.GetHashedPath(manyFileName, HashPathAlgorithm.SHA1, 3,5);
+    string hpString = HashPathFile.GetHashedPath(manyFileName, HashPathAlgorithm.SHA1, DirectoryLengths.Create(3,5));
     Console.WriteLine($"{manyFileName}: {hpString}");
 }
 
 for (int i = 0; i < 10; i++)
 {
     string manyFileName = $"0301-400-300-13214-{i:0000}.xml";
-    string hpString = HashPathFile.GetHashedPath(manyFileName, HashPathAlgorithm.SHA512, 3,5);
+    string hpString = HashPathFile.GetHashedPath(manyFileName, HashPathAlgorithm.SHA512, DirectoryLengths.Create(3,5));
     Console.WriteLine($"{manyFileName}: {hpString}");
 }
 

@@ -1,5 +1,8 @@
 <Project>
     <PropertyGroup>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <PropertyGroup>
         <CollectCoverage>true</CollectCoverage>
         <CoverletOutput>../coverage/</CoverletOutput>
         <CoverletOutputFormat>json,cobertura</CoverletOutputFormat>

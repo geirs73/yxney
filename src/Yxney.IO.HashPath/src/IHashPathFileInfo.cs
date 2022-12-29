@@ -5,7 +5,7 @@ namespace Yxney.IO.HashPath;
 
 public interface IHashPathFileInfo
 {
-    IEnumerable<int> BytesPerDirectoryLevel { get; init; }
+    DirectoryLengths DirectoryLengths { get; init; }
     HashPathAlgorithm HashingMethod { get; init; }
 
     string GetHashedPath(string path);
