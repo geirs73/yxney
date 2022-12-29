@@ -71,9 +71,6 @@ public sealed class DirectoryLengths : IEnumerable<int>
         return GetEnumerator();
     }
 
-    // public override bool Equals(object? obj) => _directoryLengths.Equals(obj);
-    //public override int GetHashCode() => _directoryLengths.GetHashCode();
-
     public override string? ToString() => _toString;
     private string AsString() => _toString;
 

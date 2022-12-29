@@ -39,33 +39,19 @@ namespace tests
         }
 
         [Test]
-        public void TestEnumerationAndEquals()
+        public void TestEnumeration()
         {
-            DirectoryLengths foo = DirectoryLengths.Create(3, 5, 1, 3);
-            Assert.That(foo.TotalLength(), Is.EqualTo(12));
+            DirectoryLengths testData = DirectoryLengths.Create(3, 5, 1, 3);
+            Assert.That(testData.TotalLength(), Is.EqualTo(12));
             int sum = 0;
             Assert.DoesNotThrow(
                 () =>
                 {
-                    foreach (int level in foo)
+                    foreach (int level in testData)
                         sum += level;
                 }
             );
-            Assert.That(sum, Is.EqualTo(12));
-            Assert.DoesNotThrow(
-                () =>
-                {
-                    IEnumerator enumerator = ((IEnumerable)foo).GetEnumerator();
-                }
-            );
-            Assert.DoesNotThrow(
-                () =>
-                {
-                    var objFoo = foo as object;
-                    objFoo.Equals(DirectoryLengths.Create(3, 5, 1, 3));
-                    int hash = objFoo.GetHashCode();
-                }
-            );
+            Assert.DoesNotThrow(() => ((IEnumerable)testData).GetEnumerator());
         }
     }
 }
