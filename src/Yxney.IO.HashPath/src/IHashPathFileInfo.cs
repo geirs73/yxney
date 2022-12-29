@@ -4,10 +4,9 @@ namespace Yxney.IO.HashPath;
 
 public interface IHashPathFileInfo
 {
-    DirectoryLengths DirectoryLengths { get; init; }
-    HashPathAlgorithm HashingMethod { get; init; }
+    DirectoryStructure DirectoryStructure { get; init; }
+    HashAlgorithmType HashMethod { get; init; }
 
-    string GetHashedPath(string filePath);
-    FileInfo GetHashedPathFileInfo(FileInfo fileInfo);
-    FileInfo GetHashedPathFileInfo(string filePath);
+    string GetPath(string filePath);
+    FileInfo GetFileInfo(string filePath);
 }

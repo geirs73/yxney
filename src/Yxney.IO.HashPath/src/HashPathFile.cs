@@ -11,70 +11,72 @@ public static class HashPathFile
 {
     private const int _MinimumFileNameLength = 5;
 
-    public static string GetHashedPath(
+    public static string GetHashPath(
         string path,
-        HashPathAlgorithm hashAlgorithm,
-        DirectoryLengths directoryLengths)
+        HashAlgorithmType hashMethod,
+        DirectoryStructure structure)
     {
-        ArgumentNullException.ThrowIfNull(directoryLengths);
-        string extension = Path.GetExtension(path);
+        ArgumentNullException.ThrowIfNull(structure);
+        string fileExtension = Path.GetExtension(path);
         string fileName = Path.GetFileNameWithoutExtension(path);
         string? directory = Path.GetDirectoryName(path);
 
-        byte[] clearTextData = Encoding.UTF8.GetBytes(fileName);
-        byte[] hashedData = HashWithSelectedAlgorithm(clearTextData, hashAlgorithm);
+        byte[] clearTextFileNameData = Encoding.UTF8.GetBytes(fileName);
+        byte[] hashedFileNameData = HashWithMethod(clearTextFileNameData, hashMethod);
 
 #pragma warning disable CA1308
-        string hashedDataHexString = Convert.ToHexString(hashedData).ToLowerInvariant();
+        string hashedFilenameDataHexString = Convert.ToHexString(hashedFileNameData).ToLowerInvariant();
 #pragma warning restore CA1308
 
-        int limit = hashedDataHexString.Length - _MinimumFileNameLength;
-        if (directoryLengths.TotalLength() > limit)
+        int charactersUsedForDirectoryStructureLimit = hashedFilenameDataHexString.Length - _MinimumFileNameLength;
+        if (structure.TotalLength() > charactersUsedForDirectoryStructureLimit)
         {
+            //TODO: Fix wording
             throw new ArgumentException(
-                $"Too many bytes are used for directory structure, try reducing it below {limit:0}",
-                nameof(directoryLengths));
+                "Too many characters are used for directory structure, try reducing total "
+                    + $"length below {charactersUsedForDirectoryStructureLimit:0}",
+                nameof(structure));
         }
 
-        string[] parts = GetHashedFilePathParts(extension, directory, hashedDataHexString, directoryLengths);
+        string[] parts = GetHashPathParts(directory, hashedFilenameDataHexString, fileExtension, structure);
         return Path.Combine(parts);
     }
 
-    private static string[] GetHashedFilePathParts(
-        string extension,
+    private static string[] GetHashPathParts(
         string? directory,
         string hashHexString,
-        DirectoryLengths bytesPerDirectoryLevel)
+        string extension,
+        DirectoryStructure structure)
     {
-        List<string> parts = new();
+        List<string> pathParts = new();
 
         int currentPosition = 0;
 
         if (directory is not null)
-            parts.Add(directory);
+            pathParts.Add(directory);
 
-        foreach (int dirLevelBytes in bytesPerDirectoryLevel)
+        foreach (int directoryNameLength in structure)
         {
-            string part = hashHexString.Substring(currentPosition, dirLevelBytes);
-            parts.Add(part);
-            currentPosition += dirLevelBytes;
+            string pathPart = hashHexString.Substring(currentPosition, directoryNameLength);
+            pathParts.Add(pathPart);
+            currentPosition += directoryNameLength;
         }
 
         string hashedFileName = hashHexString[currentPosition..];
-        parts.Add(hashedFileName + extension);
-        return parts.ToArray();
+        pathParts.Add(hashedFileName + extension);
+        return pathParts.ToArray();
     }
 
 #pragma warning disable CA5350,CA5351
-    private static byte[] HashWithSelectedAlgorithm(byte[] clearTextBytes, HashPathAlgorithm hashWith = HashPathAlgorithm.MD5)
+    private static byte[] HashWithMethod(byte[] clearTextBytes, HashAlgorithmType hashMethod = HashAlgorithmType.MD5)
     {
-        return hashWith switch
+        return hashMethod switch
         {
-            HashPathAlgorithm.SHA1 => SHA1.HashData(clearTextBytes),
-            HashPathAlgorithm.SHA256 => SHA256.HashData(clearTextBytes),
-            HashPathAlgorithm.SHA512 => SHA512.HashData(clearTextBytes),
-            HashPathAlgorithm.XxHash64 => XxHash64.Hash(clearTextBytes),
-            HashPathAlgorithm.Crc64 => Crc64.Hash(clearTextBytes),
+            HashAlgorithmType.SHA1 => SHA1.HashData(clearTextBytes),
+            HashAlgorithmType.SHA256 => SHA256.HashData(clearTextBytes),
+            HashAlgorithmType.SHA512 => SHA512.HashData(clearTextBytes),
+            HashAlgorithmType.XxHash64 => XxHash64.Hash(clearTextBytes),
+            HashAlgorithmType.Crc64 => Crc64.Hash(clearTextBytes),
             _ => MD5.HashData(clearTextBytes)
         };
 #pragma warning restore CA5350,CA5351

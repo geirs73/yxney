@@ -1,12 +1,14 @@
+using System;
 using System.IO;
 
 namespace Yxney.IO.HashPath;
 
 public static class FileInfoExtensions
 {
-    public static FileInfo GetHashPathFileInfo(this FileInfo fileInfo, HashPathAlgorithm hashMethod, DirectoryLengths structure)
+    public static FileInfo GetHashPathFileInfo(this FileInfo fileInfo, HashAlgorithmType hashMethod, DirectoryStructure structure)
     {
-        HashPathFileInfo hashPathFileInfo = new() { DirectoryLengths = structure, HashingMethod = hashMethod };
-        return hashPathFileInfo.GetHashedPathFileInfo(fileInfo);
+        ArgumentNullException.ThrowIfNull(fileInfo);
+        string hashPath = HashPathFile.GetHashPath(fileInfo.FullName, hashMethod, structure);
+        return new FileInfo(hashPath);
     }
 }
