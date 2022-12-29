@@ -1,5 +1,7 @@
 namespace Foo.Tests;
 
+#pragma warning disable RCS0056
+
 [ExcludeFromCodeCoverage]
 public class HashPathTests
 {
@@ -35,7 +37,7 @@ public class HashPathTests
         HashPathAlgorithm.XxHash64)]
     public void TestNormalScenario(string input, string expected, HashPathAlgorithm hashType)
     {
-        Assert.That(HashPathFile.GetHashedPath(input, hashType, DirectoryLengths.Create(3,5)), Is.EqualTo(expected));
+        Assert.That(HashPathFile.GetHashedPath(input, hashType, DirectoryLengths.Create(3, 5)), Is.EqualTo(expected));
     }
 
     [Test]
@@ -67,7 +69,7 @@ public class HashPathTests
     {
         HashPathFileInfo hp = new()
         {
-            DirectoryLengths = DirectoryLengths.Create(3,5),
+            DirectoryLengths = DirectoryLengths.Create(3, 5),
             HashingMethod = hashType
         };
 
@@ -86,7 +88,7 @@ public class HashPathTests
             Is.TypeOf<ArgumentException>()
                 .And.Message.EqualTo("Too many bytes are used for directory structure, "
                     + "try reducing it below 35 (Parameter 'directoryLengths')"),
-            () => HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.SHA1, DirectoryLengths.Create(3,64)));
+            () => HashPathFile.GetHashedPath("""0301-400-300-13214-0007.xml""", HashPathAlgorithm.SHA1, DirectoryLengths.Create(3, 64)));
     }
 
     [Test]
@@ -101,10 +103,11 @@ public class HashPathTests
     public void TestFileInfoExtensions()
     {
         FileInfo normalFileInfo = new("""0301-400-300-13214-0007.xml""");
-        FileInfo hashedFileInfo = normalFileInfo.GetHashPathFileInfo(HashPathAlgorithm.MD5, DirectoryLengths.Create(3,5));
+        FileInfo hashedFileInfo = normalFileInfo.GetHashPathFileInfo(HashPathAlgorithm.MD5, DirectoryLengths.Create(3, 5));
 
         string fileInfoRelativeDir = Path.GetRelativePath(Environment.CurrentDirectory, hashedFileInfo.DirectoryName!);
         string fileInfoPathRelative = Path.Combine(fileInfoRelativeDir, hashedFileInfo.Name);
         Assert.That(fileInfoPathRelative, Is.EqualTo("""ba9\61769\465c20d911d7f63874ddf2e8.xml"""));
     }
 }
+#pragma warning restore RCS0056
