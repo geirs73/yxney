@@ -1,6 +1,6 @@
 <Project>
 
-  <Target Name="LocalCleanTestCoverageFiles" BeforeTargets="VSTest">
+  <Target Name="LocalCleanTestCoverageFiles" BeforeTargets="VSTest" AfterTargets="LocalClean">
     <RemoveDir Directories="..\coverage\" />
   </Target>
 
