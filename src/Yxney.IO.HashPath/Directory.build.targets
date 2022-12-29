@@ -1,19 +1,25 @@
 <Project>
 
-  <Target Name="LocalCleanTestCoverageFiles" AfterTargets="AfterClean" BeforeTargets="VSTest">
+  <Target Name="LocalCleanTestCoverageFiles" BeforeTargets="VSTest">
     <RemoveDir Directories="..\coverage\" />
   </Target>
 
-  <Target Name="Cleanup">
+  <Target Name="LocalClean" AfterTargets="AfterClean">
     <ItemGroup>
-      <DirectoriesToDelete Include="bin\;obj\" />
       <FilesToDelete Include="..\**\*.log" />
       <FilesToDelete Include="..\**\*.binlog" />
       <FilesToDelete Include="..\**\*.bak" />
     </ItemGroup>
     <Message Text="Delete: %(FilesToDelete.Identity)" />
+    <Delete Files="@(FilesToDelete)" />
+  </Target>
+
+  <Target Name="Cleanup">
+    <ItemGroup>
+      <DirectoriesToDelete Include="bin\;obj\"/>
+    </ItemGroup>
     <Message Text="RemoveDir: %(DirectoriesToDelete.Identity)" />
-    <RemoveDir Directories="@(DirectoriesToDelete)" />
+    <RemoveDir Directories="@(DirectoriesToDelete)" ContinueOnError="true" />
     <Delete Files="@(FilesToDelete)" />
   </Target>
 
