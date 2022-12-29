@@ -16,14 +16,11 @@ for (int i = 0; i < 10; i++)
     byte[] hashBytes3 = Crc64.Hash(textBytes);
     byte[] hashBytes4 = XxHash64.Hash(textBytes);
 
-    //    byte[]
-
     string hashHexString1 = Convert.ToHexString(hashBytes1).ToLowerInvariant();
     string hashHexString2 = Convert.ToHexString(hashBytes2).ToLowerInvariant();
     string hashHexString3 = Convert.ToHexString(hashBytes3).ToLowerInvariant();
     string hashHexString4 = Convert.ToHexString(hashBytes4).ToLowerInvariant();
-    // p.SetAttributeValue("hash", hashHexString);
-    // string hashBase64String = Convert.ToBase64String(hashBytes);
+
     Console.WriteLine($"{manyFileName}: {hashHexString1} {hashHexString2} {hashHexString3} {hashHexString4}");
 }
 
