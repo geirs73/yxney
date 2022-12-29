@@ -1,4 +1,4 @@
-namespace Foo.Tests;
+namespace Yxney.IO.HashPath.Tests;
 
 #pragma warning disable RCS0056
 

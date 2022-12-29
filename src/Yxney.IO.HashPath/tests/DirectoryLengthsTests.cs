@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace tests;
+namespace Yxney.IO.HashPath.Tests;
 
 [ExcludeFromCodeCoverage]
 public class DirectoryLengthsTests
