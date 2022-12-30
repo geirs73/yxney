@@ -4,6 +4,7 @@
         "classlib",
         "cobertura",
         "globaltool",
+        "hashpath",
         "jacoco",
         "lcov",
         "msbuild",
