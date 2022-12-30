@@ -3,11 +3,12 @@
 
 name: .NET
 
-on:
+on: 
   push:
     branches: [ "hashpath" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch: 
 
 env:
   solution: 'src\'
