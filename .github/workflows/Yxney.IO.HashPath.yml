@@ -3,15 +3,28 @@
 
 name: Yxney.IO.HashPath workflows
 
-on: 
+on:
   push:
     paths: [ "src/Yxney.IO.HashPath/**" ]
     branches: [ "hashpath" ]
   pull_request:
     paths: [ "src/Yxney.IO.HashPath/**" ]
     branches: [ "main" ]
-  workflow_dispatch: 
-
+  workflow_dispatch:
+    inputs:
+      packageVersion:
+        type: string
+        description: version number
+        required: true
+        default: 0.0.1
+      publish:
+        type: boolean
+        description: whether to publish package to nuget.org
+        required: false
+        default: false
+      env1:
+        type: environment
+        description: environment
 env:
   solution: 'src\'
   buildPlatform: Any CPU
