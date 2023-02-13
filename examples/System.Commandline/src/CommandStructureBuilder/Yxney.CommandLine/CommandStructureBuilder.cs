@@ -1,18 +1,19 @@
 using System.CommandLine;
+using Yxney.CommandLine.Handler;
 
-namespace CommandStructureBuilder;
+namespace Yxney.CommandLine.Structure;
 
 public interface ICommandStructureBuilder
 {
-    CommandStructureBuilder Add(ICommandBinder parent, ICommandBinder child);
-    CommandStructureBuilder Add(ICommandBinder root);
+    CommandStructureBuilder Add(ICommandHandler parent, ICommandHandler child);
+    CommandStructureBuilder Add(ICommandHandler root);
 }
 
 public class CommandStructureBuilder : ICommandStructureBuilder
 {
-    private readonly Dictionary<string, ICommandBinder> _dictionary = new();
+    private readonly Dictionary<string, ICommandHandler> _dictionary = new();
 
-    public CommandStructureBuilder Add(ICommandBinder parent, ICommandBinder child)
+    public CommandStructureBuilder Add(ICommandHandler parent, ICommandHandler child)
     {
         string key = child.GetType().Name;
         string parentKey = parent.GetType().Name;
@@ -27,7 +28,7 @@ public class CommandStructureBuilder : ICommandStructureBuilder
         return this;
     }
 
-    public CommandStructureBuilder Add(ICommandBinder root)
+    public CommandStructureBuilder Add(ICommandHandler root)
     {
         string key = root.GetType().Name;
         if (_dictionary.Count > 0) throw new ArgumentException("You need to add the root first");

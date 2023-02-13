@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>CommandStructureBuilder</RootNamespace>
+    <AssemblyName>csb</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
