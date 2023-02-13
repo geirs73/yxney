@@ -1,31 +1,37 @@
-namespace CommandStructureBuilder
+using System.CommandLine;
+
+namespace CommandStructureBuilder;
+
+public interface ICommandStructureBuilder
 {
-    public interface ICommandStructureElement
+    CommandStructureBuilder Add(ICommandBinder parent, ICommandBinder child);
+    CommandStructureBuilder Add(ICommandBinder root);
+}
+
+public class CommandStructureBuilder : ICommandStructureBuilder
+{
+    private readonly Dictionary<string, ICommandBinder> _dictionary = new();
+
+    public CommandStructureBuilder Add(ICommandBinder parent, ICommandBinder child)
     {
+        string key = child.GetType().Name;
+        string parentKey = parent.GetType().Name;
+        if (_dictionary.ContainsKey(parentKey))
+        {
+            throw new ArgumentException("Parent command not found.", nameof(parent));
+        }
+        if (_dictionary.ContainsKey(key))
+        {
+            _dictionary.Add(key, child);
+        }
+        return this;
     }
 
-    public class CommandStructureBuilder
+    public CommandStructureBuilder Add(ICommandBinder root)
     {
-        private readonly Dictionary<string, ICommandStructureElement> _dictionary = new();
-
-        public CommandStructureBuilder Add(ICommandStructureElement parent, ICommandStructureElement child)
-        {
-            string key = child.GetType().Name;
-            string parentKey = parent.GetType().Name;
-            if (_dictionary.ContainsKey(parentKey))
-            {
-                throw new ArgumentException("Parent command not found.", nameof(parent));
-            }
-            if (_dictionary.ContainsKey(key))
-            {
-                _dictionary.Add(key, child);
-            }
-            return this;
-        }
-
-        public CommandStructureBuilder Add(ICommandStructureElement root)
-        {
-            return this;
-        }
+        string key = root.GetType().Name;
+        if (_dictionary.Count > 0) throw new ArgumentException("You need to add the root first");
+        _dictionary.Add(key, root);
+        return this;
     }
 }

@@ -7,6 +7,8 @@ internal static class Program
 {
     private static async Task<int> Main(string[] args)
     {
+        var commandStructureBuilder = new CommandStructureBuilder();
+        
         Command coberturaCommand = new("cobertura", "Convert to cobertura.");
         // var coberturaBinder = new CoberturaCommandBinder(coberturaCommand);
 
