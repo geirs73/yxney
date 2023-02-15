@@ -12,5 +12,4 @@ public class RootCommandHandler : ICommandHandler
     {
         RootCommand = new RootCommand("Tool for running OpenPolicyAgent on windows developer computers.");
     }
-
 }

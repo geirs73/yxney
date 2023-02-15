@@ -10,10 +10,8 @@ namespace CommandStructureBuilder.Binders;
 public class CopyFileCommandHandler : BinderBase<CopyFileCommand>, ICommandHandler
 {
     protected Argument<FileInfo> InputArgument { get; set; }
-
     protected Argument<FileInfo> OutputArgument { get; set; }
     protected Option<bool> ForceOption { get; set; }
-
     public Command Command { get; }
 
     public CopyFileCommandHandler()
@@ -27,7 +25,7 @@ public class CopyFileCommandHandler : BinderBase<CopyFileCommand>, ICommandHandl
             OutputArgument,
             ForceOption
         };
-        Command.SetHandler(command => CopyFileCommand.Execute(command), this);
+        Command.SetHandler(command => CopyFileCommand.ExecuteAsync(command), this);
     }
 
     protected override CopyFileCommand GetBoundValue(BindingContext bindingContext)

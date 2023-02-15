@@ -18,13 +18,11 @@ public class CommandStructureBuilder : ICommandStructureBuilder
         string key = child.GetType().Name;
         string parentKey = parent.GetType().Name;
         if (_dictionary.ContainsKey(parentKey))
-        {
             throw new ArgumentException("Parent command not found.", nameof(parent));
-        }
+
         if (_dictionary.ContainsKey(key))
-        {
             _dictionary.Add(key, child);
-        }
+
         return this;
     }
 

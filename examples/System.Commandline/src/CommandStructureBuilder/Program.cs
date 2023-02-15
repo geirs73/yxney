@@ -1,5 +1,4 @@
-﻿
-using System.CommandLine;
+﻿using System.CommandLine;
 using CommandStructureBuilder.Binders;
 
 var copyFileCmdHandler = new CopyFileCommandHandler();
