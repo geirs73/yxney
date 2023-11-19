@@ -9,7 +9,7 @@ namespace Yxney.IO.HashPath;
 
 public static class HashPathFile
 {
-    private const int _MinimumFileNameLength = 5;
+    private const int MinimumFileNameLength = 5;
 
     public static string GetHashPath(
         string path,
@@ -28,7 +28,7 @@ public static class HashPathFile
         string hashedFilenameDataHexString = Convert.ToHexString(hashedFileNameData).ToLowerInvariant();
 #pragma warning restore CA1308
 
-        int charactersUsedForDirectoryStructureLimit = hashedFilenameDataHexString.Length - _MinimumFileNameLength;
+        int charactersUsedForDirectoryStructureLimit = hashedFilenameDataHexString.Length - MinimumFileNameLength;
         if (structure.TotalLength() > charactersUsedForDirectoryStructureLimit)
         {
             //TODO: Fix wording
