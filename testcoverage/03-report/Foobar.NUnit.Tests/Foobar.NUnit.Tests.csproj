@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <IsCoverageTestProject>true</IsCoverageTestProject>
+    <!-- <IsCoverageTestProject>true</IsCoverageTestProject> -->
   </PropertyGroup>
 
   <ItemGroup>
