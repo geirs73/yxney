@@ -37,7 +37,8 @@ public class HashPathTests
         HashAlgorithmType.XxHash64)]
     public void TestNormalScenario(string input, string expected, HashAlgorithmType hashType)
     {
-        Assert.That(HashPathFile.GetHashPath(input, hashType, DirectoryStructure.Create(3, 5)), Is.EqualTo(expected));
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+        Assert.That(HashPathFile.GetHashPath(input, hashType, DirectoryStructure.Create(3, 5)), Is.EqualTo(expectedPath));
     }
 
     [Test]
@@ -74,11 +75,12 @@ public class HashPathTests
         };
 
         string path = hp.GetPath(input);
-        Assert.That(path, Is.EqualTo(expected));
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+        Assert.That(path, Is.EqualTo(expectedPath));
         FileInfo fileInfo = hp.GetFileInfo(input);
         string fileInfoRelativeDir = Path.GetRelativePath(Environment.CurrentDirectory, fileInfo.DirectoryName!);
         string fileInfoPathRelative = Path.Combine(fileInfoRelativeDir, fileInfo.Name);
-        Assert.That(fileInfoPathRelative, Is.EqualTo(expected));
+        Assert.That(fileInfoPathRelative, Is.EqualTo(expectedPath));
     }
 
     [Test]
@@ -99,14 +101,17 @@ public class HashPathTests
     }
 
     [Test]
-    public void TestFileInfoExtensions()
+    [TestCase("0301-400-300-13214-0007.xml", """ba9\61769\465c20d911d7f63874ddf2e8.xml""")]
+    public void TestFileInfoExtensions(string input, string expected)
     {
-        FileInfo normalFileInfo = new("""0301-400-300-13214-0007.xml""");
+        FileInfo normalFileInfo = new(input);
         FileInfo hashedFileInfo = normalFileInfo.GetHashPathFileInfo(HashAlgorithmType.MD5, DirectoryStructure.Create(3, 5));
 
         string fileInfoRelativeDir = Path.GetRelativePath(Environment.CurrentDirectory, hashedFileInfo.DirectoryName!);
         string fileInfoPathRelative = Path.Combine(fileInfoRelativeDir, hashedFileInfo.Name);
-        Assert.That(fileInfoPathRelative, Is.EqualTo("""ba9\61769\465c20d911d7f63874ddf2e8.xml"""));
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+
+        Assert.That(fileInfoPathRelative, Is.EqualTo(expectedPath));
     }
 }
 #pragma warning restore RCS0056
