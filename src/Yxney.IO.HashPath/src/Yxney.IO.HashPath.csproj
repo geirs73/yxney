@@ -6,7 +6,7 @@
         <Authors>Geir Sørensen</Authors>
         <Company>Geir Sørensen</Company>
         <Product>Yxney.IO.HashPath library</Product>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
 
         <PackageId>Yxney.IO.HashPath</PackageId>
         <PackageDescription>
@@ -23,7 +23,7 @@
         <AnalysisMode>All</AnalysisMode>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="System.IO.Hashing" Version="6.0.0" />
+        <PackageReference Include="System.IO.Hashing" Version="8.0.0" />
     </ItemGroup>
 
 </Project>

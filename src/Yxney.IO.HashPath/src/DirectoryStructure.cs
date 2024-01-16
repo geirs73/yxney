@@ -47,7 +47,7 @@ public sealed class DirectoryStructure : IEnumerable<int>
     }
 
     private DirectoryStructure()
-        : this(new int[] { 3 })
+        : this(DefaultLevelLengths)
     {
     }
 
@@ -78,6 +78,8 @@ public sealed class DirectoryStructure : IEnumerable<int>
 
     [ExcludeFromCodeCoverage]
     private string DebuggerDisplay => $"{nameof(DirectoryStructure)}: {_toString} ({_totalLength:0})";
+
+    private static readonly int[] DefaultLevelLengths = [3];
 
     public static implicit operator string(DirectoryStructure structure)
     {
