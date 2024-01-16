@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/exe/HashPathConsole/bin/Debug/net7.0/HashPathConsole.dll",
+            "program": "${workspaceFolder}/exe/HashPathConsole/bin/Debug/net8.0/HashPathConsole.dll",
             "args": [],
             "cwd": "${workspaceFolder}/exe/HashPathConsole",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
