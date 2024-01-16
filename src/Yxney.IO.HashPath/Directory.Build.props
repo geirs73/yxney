@@ -1,9 +1,10 @@
 <Project>
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <!-- <AnalysisMode>All</AnalysisMode> -->
     </PropertyGroup>
-    <PropertyGroup>
+    <PropertyGroup Condition="'$(PerformTestCoverage)' == 'true'">
         <CollectCoverage>true</CollectCoverage>
         <CoverletOutput>../coverage/</CoverletOutput>
         <CoverletOutputFormat>json,cobertura</CoverletOutputFormat>

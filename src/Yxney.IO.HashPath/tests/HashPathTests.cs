@@ -12,58 +12,59 @@ public class HashPathTests
 
     [Test]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """ba9\61769\465c20d911d7f63874ddf2e8.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"ba9\61769\465c20d911d7f63874ddf2e8.xml",
         HashAlgorithmType.MD5)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """03d\35620\4004b3c42294b48f8f1901a54559d502.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"03d\35620\4004b3c42294b48f8f1901a54559d502.xml",
         HashAlgorithmType.SHA1)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """412\bb27b\8b33a504.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"412\bb27b\8b33a504.xml",
         HashAlgorithmType.Crc64)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """039\64d61\eb8c376ffab7a7132d23bd3742edc9362bbb30731a0ca1c3509515b0.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"039\64d61\eb8c376ffab7a7132d23bd3742edc9362bbb30731a0ca1c3509515b0.xml",
         HashAlgorithmType.SHA256)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """0e5\3ecaa\3d15fd5caa84542cb043b4b6c0aab3ebe202e34537719b900658f8ac93cd2560fa2dbe76a1383153c05625c37d7bf9e44f80388dba12daec5b695fe5.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"0e5\3ecaa\3d15fd5caa84542cb043b4b6c0aab3ebe202e34537719b900658f8ac93cd2560fa2dbe76a1383153c05625c37d7bf9e44f80388dba12daec5b695fe5.xml",
         HashAlgorithmType.SHA512)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """b5a\0f9b4\c9bb837e.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"b5a\0f9b4\c9bb837e.xml",
         HashAlgorithmType.XxHash64)]
     public void TestNormalScenario(string input, string expected, HashAlgorithmType hashType)
     {
-        Assert.That(HashPathFile.GetHashPath(input, hashType, DirectoryStructure.Create(3, 5)), Is.EqualTo(expected));
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+        Assert.That(HashPathFile.GetHashPath(input, hashType, DirectoryStructure.Create(3, 5)), Is.EqualTo(expectedPath));
     }
 
     [Test]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """ba9\61769\465c20d911d7f63874ddf2e8.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"ba9\61769\465c20d911d7f63874ddf2e8.xml",
         HashAlgorithmType.MD5)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """03d\35620\4004b3c42294b48f8f1901a54559d502.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"03d\35620\4004b3c42294b48f8f1901a54559d502.xml",
         HashAlgorithmType.SHA1)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """412\bb27b\8b33a504.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"412\bb27b\8b33a504.xml",
         HashAlgorithmType.Crc64)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """039\64d61\eb8c376ffab7a7132d23bd3742edc9362bbb30731a0ca1c3509515b0.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"039\64d61\eb8c376ffab7a7132d23bd3742edc9362bbb30731a0ca1c3509515b0.xml",
         HashAlgorithmType.SHA256)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """0e5\3ecaa\3d15fd5caa84542cb043b4b6c0aab3ebe202e34537719b900658f8ac93cd2560fa2dbe76a1383153c05625c37d7bf9e44f80388dba12daec5b695fe5.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"0e5\3ecaa\3d15fd5caa84542cb043b4b6c0aab3ebe202e34537719b900658f8ac93cd2560fa2dbe76a1383153c05625c37d7bf9e44f80388dba12daec5b695fe5.xml",
         HashAlgorithmType.SHA512)]
     [TestCase(
-        """0301-400-300-13214-0007.xml""",
-        """b5a\0f9b4\c9bb837e.xml""",
+        "0301-400-300-13214-0007.xml",
+        @"b5a\0f9b4\c9bb837e.xml",
         HashAlgorithmType.XxHash64)]
     public void TestNormalScenarioObjectVersion(string input, string expected, HashAlgorithmType hashType)
     {
@@ -74,11 +75,12 @@ public class HashPathTests
         };
 
         string path = hp.GetPath(input);
-        Assert.That(path, Is.EqualTo(expected));
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+        Assert.That(path, Is.EqualTo(expectedPath));
         FileInfo fileInfo = hp.GetFileInfo(input);
         string fileInfoRelativeDir = Path.GetRelativePath(Environment.CurrentDirectory, fileInfo.DirectoryName!);
         string fileInfoPathRelative = Path.Combine(fileInfoRelativeDir, fileInfo.Name);
-        Assert.That(fileInfoPathRelative, Is.EqualTo(expected));
+        Assert.That(fileInfoPathRelative, Is.EqualTo(expectedPath));
     }
 
     [Test]
@@ -87,26 +89,32 @@ public class HashPathTests
         Assert.Throws(
             Is.TypeOf<ArgumentException>()
                 .And.Message.EqualTo("Too many characters are used for directory structure, try reducing total length below 35 (Parameter 'structure')"),
-            () => HashPathFile.GetHashPath("""0301-400-300-13214-0007.xml""", HashAlgorithmType.SHA1, DirectoryStructure.Create(3, 64)));
+            () => HashPathFile.GetHashPath("0301-400-300-13214-0007.xml", HashAlgorithmType.SHA1, DirectoryStructure.Create(3, 64)));
     }
 
     [Test]
-    public void TestDefaultPath()
+    [TestCase("0301-400-300-13214-0007.xml", @"ba9\61769465c20d911d7f63874ddf2e8.xml")]
+    public void TestDefaultPath(string input, string expected)
     {
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+
         Assert.That(
-            HashPathFile.GetHashPath("""0301-400-300-13214-0007.xml""", HashAlgorithmType.MD5, DirectoryStructure.Create()),
-            Is.EqualTo("""ba9\61769465c20d911d7f63874ddf2e8.xml"""));
+            HashPathFile.GetHashPath(input, HashAlgorithmType.MD5, DirectoryStructure.Create()),
+            Is.EqualTo(expectedPath));
     }
 
     [Test]
-    public void TestFileInfoExtensions()
+    [TestCase("0301-400-300-13214-0007.xml", @"ba9\61769\465c20d911d7f63874ddf2e8.xml")]
+    public void TestFileInfoExtensions(string input, string expected)
     {
-        FileInfo normalFileInfo = new("""0301-400-300-13214-0007.xml""");
+        FileInfo normalFileInfo = new(input);
         FileInfo hashedFileInfo = normalFileInfo.GetHashPathFileInfo(HashAlgorithmType.MD5, DirectoryStructure.Create(3, 5));
 
         string fileInfoRelativeDir = Path.GetRelativePath(Environment.CurrentDirectory, hashedFileInfo.DirectoryName!);
         string fileInfoPathRelative = Path.Combine(fileInfoRelativeDir, hashedFileInfo.Name);
-        Assert.That(fileInfoPathRelative, Is.EqualTo("""ba9\61769\465c20d911d7f63874ddf2e8.xml"""));
+        var expectedPath = expected.Replace('\\', Path.DirectorySeparatorChar);
+
+        Assert.That(fileInfoPathRelative, Is.EqualTo(expectedPath));
     }
 }
 #pragma warning restore RCS0056
