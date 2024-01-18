@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DllTreeCmd": {
+      "commandName": "Project",
+      "commandLineArgs": "--path c:\\Perforce\\nps --pattern DNVS.*.dll --exclude-dirs obj;NPS\\Solutions"
+    }
+  }
+}
