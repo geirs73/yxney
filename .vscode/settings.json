@@ -12,5 +12,6 @@
         "reportgenerator",
         "xunit",
         "Yxney"
-    ]
+    ],
+    "sarif-viewer.connectToGithubCodeScanning": "off"
 }

@@ -23,10 +23,13 @@ internal class Program
     {
         switch (format)
         {
-            case OutputFormat.Csv: break;
+            case OutputFormat.Csv:
+                break;
+
             default:
                 throw new Exception("Only CSV format is supported at this time");
         }
+
         DirectoryInfo dir = new(path);
 
         FileInfo[] files = dir.GetFiles(pattern, SearchOption.AllDirectories);
@@ -44,7 +47,7 @@ internal class Program
             .ToList();
 
         IEnumerable<string> filesStringArray = exeAndDllFiles.Select(f => f.FullName);
-        
+
         PathAssemblyResolver resolver = new(filesStringArray);
 
         Console.Out.WriteLine("sep=;");

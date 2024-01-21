@@ -5,7 +5,7 @@ root = true
 indent_style = space
 
 # Xml files
-[*.xml]
+[*.{xml,csproj,targets,props}]
 indent_size = 2
 
 # C# files
@@ -365,3 +365,7 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+
+
+# RCS0045: Use linefeed as newline.
+dotnet_diagnostic.RCS0045.severity = none

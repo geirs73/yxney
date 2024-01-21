@@ -1,0 +1,14 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>all</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NoWarn Include="CA1717" />
+  </ItemGroup>
+
+</Project>
