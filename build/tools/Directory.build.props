@@ -4,9 +4,12 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <AnalysisLevel>preview</AnalysisLevel>
+    <ReportAnalyzer>true</ReportAnalyzer>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.*" PrivateAssets="all" /> -->
+    <!-- <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.*"
+      PrivateAssets="all" /> -->
   </ItemGroup>
 </Project>

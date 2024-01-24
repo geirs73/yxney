@@ -7,7 +7,7 @@ namespace SarifTestLib;
 public class Class1
 {
     private Foobars foobars;
-    private Foobars _zotzot;
+    private Foobars zotzot;
 
     void DoSomething(Foobars foobars)
     {
