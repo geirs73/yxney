@@ -4,6 +4,9 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <WarningLevel>5</WarningLevel>
     <AnalysisLevel>preview</AnalysisLevel>
     <ReportAnalyzer>true</ReportAnalyzer>
   </PropertyGroup>

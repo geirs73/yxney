@@ -1,0 +1,74 @@
+[
+  {
+    "DocumentId": {
+      "ProjectId": {
+        "Id": "c4fce009-7314-420b-b4c9-1d1c4da7416b"
+      },
+      "Id": "214220a5-407b-44c9-9786-535f7e499d5f"
+    },
+    "FileName": "Class1.cs",
+    "FilePath": "C:\\git\\public\\yxney\\build\\tools\\src\\SarifBuildExtensions\\Class1.cs",
+    "FileChanges": [
+      {
+        "LineNumber": 5,
+        "CharNumber": 17,
+        "DiagnosticId": "IDE0044",
+        "FormatDescription": "error IDE0044: Make field readonly"
+      }
+    ]
+  },
+  {
+    "DocumentId": {
+      "ProjectId": {
+        "Id": "c4fce009-7314-420b-b4c9-1d1c4da7416b"
+      },
+      "Id": "214220a5-407b-44c9-9786-535f7e499d5f"
+    },
+    "FileName": "Class1.cs",
+    "FilePath": "C:\\git\\public\\yxney\\build\\tools\\src\\SarifBuildExtensions\\Class1.cs",
+    "FileChanges": [
+      {
+        "LineNumber": 5,
+        "CharNumber": 17,
+        "DiagnosticId": "IDE1006",
+        "FormatDescription": "error IDE1006: Naming rule violation: Missing prefix: \u0027_\u0027"
+      }
+    ]
+  },
+  {
+    "DocumentId": {
+      "ProjectId": {
+        "Id": "c4fce009-7314-420b-b4c9-1d1c4da7416b"
+      },
+      "Id": "214220a5-407b-44c9-9786-535f7e499d5f"
+    },
+    "FileName": "Class1.cs",
+    "FilePath": "C:\\git\\public\\yxney\\build\\tools\\src\\SarifBuildExtensions\\Class1.cs",
+    "FileChanges": [
+      {
+        "LineNumber": 5,
+        "CharNumber": 17,
+        "DiagnosticId": "IDE0044",
+        "FormatDescription": "error IDE0044: Make field readonly"
+      }
+    ]
+  },
+  {
+    "DocumentId": {
+      "ProjectId": {
+        "Id": "c4fce009-7314-420b-b4c9-1d1c4da7416b"
+      },
+      "Id": "214220a5-407b-44c9-9786-535f7e499d5f"
+    },
+    "FileName": "Class1.cs",
+    "FilePath": "C:\\git\\public\\yxney\\build\\tools\\src\\SarifBuildExtensions\\Class1.cs",
+    "FileChanges": [
+      {
+        "LineNumber": 5,
+        "CharNumber": 17,
+        "DiagnosticId": "IDE1006",
+        "FormatDescription": "error IDE1006: Naming rule violation: Missing prefix: \u0027_\u0027"
+      }
+    ]
+  }
+]

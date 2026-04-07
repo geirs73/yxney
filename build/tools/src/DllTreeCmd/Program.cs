@@ -1,4 +1,6 @@
-﻿namespace DllTreeCmd;
+﻿using System.Globalization;
+
+namespace DllTreeCmd;
 
 internal class Program
 {
@@ -27,7 +29,7 @@ internal class Program
                 break;
 
             default:
-                throw new Exception("Only CSV format is supported at this time");
+                throw new ArgumentException("Only CSV format is supported at this time", nameof(format));
         }
 
         DirectoryInfo dir = new(path);
@@ -42,9 +44,11 @@ internal class Program
             .Where(f => !exclusions.Contains(f.FullName, StringComparer.OrdinalIgnoreCase));
 
         HashSet<string> assemblyExtensions = [".exe", "dll"];
+#pragma warning disable CA1308 // Normalize strings to uppercase
         List<FileInfo> exeAndDllFiles = nonExcludedFiles
             .Where(f => assemblyExtensions.Contains(f.Extension.ToLowerInvariant()))
             .ToList();
+#pragma warning restore CA1308 // Normalize strings to uppercase
 
         IEnumerable<string> filesStringArray = exeAndDllFiles.Select(f => f.FullName);
 
@@ -62,7 +66,7 @@ internal class Program
             string versionString = version.ToString(4);
             FileVersionInfo fileVersion = FileVersionInfo.GetVersionInfo(f.FullName);
 
-            string formattedTime = f.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+            string formattedTime = f.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
             Console.Out.WriteLine($"{f.DirectoryName};{f.Name};{versionString};{fileVersion.ProductVersion};{fileVersion.FileVersion};{formattedTime}");
         }
     }
